@@ -41,6 +41,8 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+
+// These are preprocessor directives to include various AVR libraries and header files required for the project.
 #include <avr/io.h>
 #include <avr/eeprom.h>
 #include <avr/wdt.h>
@@ -49,6 +51,13 @@
 #include "./Wire.h"
 #include "./RTClib.h"
 #include "open_evse.h"
+
+/*
+These are conditional compilation statements. If TEMPERATURE_MONITORING is defined,
+it will include the header files for temperature sensors. If MCP9808_IS_ON_I2C is defined,
+it will include the header file for the MCP9808 temperature sensor. If TMP007_IS_ON_I2C is
+defined, it will include the header file for the TMP007 IR temperature sensor.
+*/
 
 // if using I2CLCD_PCF8574 uncomment below line  and comment out LiquidTWI2.h above
 //#include "./LiquidCrystal_I2C.h"
@@ -61,6 +70,8 @@
   #endif 
 #endif // TEMPERATURE_MONITORING
 
+
+// ====================================================================================================
 
 #ifdef BTN_MENU
 SettingsMenu g_SettingsMenu;
@@ -108,6 +119,7 @@ TimeLimitMenu g_TimeLimitMenu;
 #endif // TIME_LIMIT
 
 
+// Define an array of pointers to the base class Menu, called g_SettingsMenuList
 Menu *g_SettingsMenuList[] = {
 #ifdef TIME_LIMIT
   &g_TimeLimitMenu,
@@ -153,8 +165,9 @@ Menu *g_SetupMenuList[] = {
 
 BtnHandler g_BtnHandler;
 #endif // BTN_MENU
+// ====================================================================================================
 
-#define g_sHHMMfmt "%02d:%02d"
+#define g_sHHMMfmt "%02d:%02d" //This macro is likely used to format time values in the HH:MM format.
 
 //-- begin global variables
 
